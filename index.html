@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>苏州工业园区第三实验小学 | 生命成长的乐园</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --primary: #0d6efd;
+    --primary-dark: #0a58ca;
+    --accent: #ff9500;
+    --accent-2: #22c55e;
+    --bg: #f7f9fc;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --card: #ffffff;
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  /* 顶部通知栏 */
+  .topbar {
+    background: #0a2540;
+    color: #dbe4f0;
+    font-size: 13px;
+    padding: 6px 0;
+  }
+  .topbar .container {
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
+  }
+
+  /* 容器 */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* 导航 */
+  header.nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 0;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .logo-mark {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 800; font-size: 20px;
+    box-shadow: 0 4px 12px rgba(13,110,253,0.35);
+  }
+  .logo-text h1 { font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+  .logo-text p { font-size: 12px; color: var(--muted); letter-spacing: 2px; }
+
+  nav ul {
+    list-style: none; display: flex; gap: 8px;
+  }
+  nav a {
+    padding: 8px 14px; border-radius: 8px;
+    font-size: 15px; font-weight: 500;
+    transition: all 0.2s;
+  }
+  nav a:hover { background: var(--primary); color: #fff; }
+
+  .menu-toggle {
+    display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--primary);
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 560px;
+    color: #fff;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(255,149,0,0.35), transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(34,197,94,0.3), transparent 45%),
+      linear-gradient(135deg, #0d6efd 0%, #0a2540 100%);
+  }
+  .hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 10% 90%, rgba(255,255,255,0.08) 2px, transparent 3px),
+      radial-gradient(circle at 70% 30%, rgba(255,255,255,0.06) 2px, transparent 3px),
+      radial-gradient(circle at 40% 60%, rgba(255,255,255,0.05) 1px, transparent 2px);
+    background-size: 80px 80px, 100px 100px, 60px 60px;
+    opacity: 0.8;
+  }
+  .hero-content {
+    position: relative; z-index: 1;
+    padding: 100px 0 120px;
+    max-width: 760px;
+  }
+  .hero .tag {
+    display: inline-block;
+    padding: 6px 14px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px;
+    font-size: 13px; margin-bottom: 18px;
+    backdrop-filter: blur(6px);
+  }
+  .hero h2 {
+    font-size: 48px; font-weight: 800; line-height: 1.25;
+    margin-bottom: 18px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+  }
+  .hero h2 span { color: var(--accent); }
+  .hero p {
+    font-size: 17px; opacity: 0.92; max-width: 620px; margin-bottom: 30px;
+  }
+  .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    padding: 12px 26px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.25s;
+    cursor: pointer; border: none;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #e07e00; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,149,0,0.4); }
+  .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.6); }
+  .btn-outline:hover { background: #fff; color: var(--primary); }
+
+  /* 核心数据条 */
+  .stats {
+    position: relative; z-index: 2;
+    margin: -60px auto 0;
+    max-width: 1100px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 24px;
+  }
+  .stat-item { text-align: center; padding: 10px; border-right: 1px solid #eef2f7; }
+  .stat-item:last-child { border-right: none; }
+  .stat-item .num {
+    font-size: 34px; font-weight: 800; color: var(--primary);
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .stat-item .label { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+  /* 通用区块 */
+  section { padding: 80px 0; }
+  .section-title {
+    text-align: center; margin-bottom: 50px;
+  }
+  .section-title .kicker {
+    display: inline-block; color: var(--primary); font-weight: 700; letter-spacing: 2px; font-size: 13px;
+    margin-bottom: 8px; text-transform: uppercase;
+  }
+  .section-title h3 {
+    font-size: 34px; font-weight: 800;
+    margin-bottom: 12px;
+  }
+  .section-title p { color: var(--muted); max-width: 640px; margin: 0 auto; }
+
+  /* 关于：双栏 */
+  .about-grid {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 50px; align-items: center;
+  }
+  .about-image {
+    border-radius: 18px; overflow: hidden;
+    height: 420px;
+    background:
+      linear-gradient(135deg, rgba(13,110,253,0.7), rgba(255,149,0,0.5)),
+      repeating-linear-gradient(45deg, #0a2540, #0a2540 10px, #0d3b66 10px, #0d3b66 20px);
+    position: relative;
+    box-shadow: var(--shadow);
+  }
+  .about-image::after {
+    content: "苏州工业园区第三实验小学";
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 28px; font-weight: 700; letter-spacing: 4px;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+  .about-text h4 { font-size: 24px; margin-bottom: 14px; color: var(--primary-dark); }
+  .about-text p { color: #374151; margin-bottom: 14px; }
+  .about-text .meta {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    margin-top: 20px;
+  }
+  .about-text .meta div {
+    background: #fff; padding: 14px; border-radius: 10px; border: 1px solid #eef2f7;
+  }
+  .about-text .meta strong { color: var(--primary); display: block; font-size: 13px; }
+
+  /* 理念卡片 */
+  .philosophy { background: #fff; }
+  .phi-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  }
+  .phi-card {
+    background: var(--bg);
+    border-radius: 16px; padding: 30px 22px;
+    text-align: center;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+  }
+  .phi-card:hover { transform: translateY(-6px); border-color: var(--primary); box-shadow: var(--shadow); }
+  .phi-icon {
+    width: 60px; height: 60px; margin: 0 auto 16px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 28px; color: #fff;
+  }
+  .phi-card:nth-child(1) .phi-icon { background: linear-gradient(135deg, #0d6efd, #3b82f6); }
+  .phi-card:nth-child(2) .phi-icon { background: linear-gradient(135deg, #ff9500, #ffb347); }
+  .phi-card:nth-child(3) .phi-icon { background: linear-gradient(135deg, #22c55e, #4ade80); }
+  .phi-card:nth-child(4) .phi-icon { background: linear-gradient(135deg, #a855f7, #c084fc); }
+  .phi-card h5 { font-size: 18px; margin-bottom: 8px; }
+  .phi-card p { color: var(--muted); font-size: 14px; }
+
+  /* 核心价值条 */
+  .values-bar {
+    margin-top: 40px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: #fff;
+    border-radius: 16px;
+    padding: 32px;
+    text-align: center;
+  }
+  .values-bar h5 { font-size: 16px; opacity: 0.9; margin-bottom: 10px; letter-spacing: 2px; }
+  .values-bar p { font-size: 22px; font-weight: 700; letter-spacing: 4px; }
+
+  /* 特色教育 */
+  .features {
+    background: linear-gradient(180deg, #f7f9fc 0%, #eef3fb 100%);
+  }
+  .feat-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .feat-card {
+    background: #fff; border-radius: 16px; padding: 28px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .feat-card::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  .feat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .feat-card:hover::before { transform: scaleX(1); }
+  .feat-card .emoji { font-size: 36px; margin-bottom: 12px; }
+  .feat-card h5 { font-size: 20px; margin-bottom: 10px; color: var(--primary-dark); }
+  .feat-card p { font-size: 14px; color: #4b5563; }
+  .feat-tags { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .feat-tags span {
+    font-size: 12px; padding: 3px 10px; border-radius: 999px;
+    background: #eef3fb; color: var(--primary);
+  }
+
+  /* 荣誉 */
+  .honors { background: #fff; }
+  .honor-list {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+  }
+  .honor-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 18px 20px;
+    background: var(--bg);
+    border-radius: 12px;
+    border-left: 4px solid var(--accent);
+    transition: all 0.25s;
+  }
+  .honor-item:hover { background: #fff; box-shadow: var(--shadow); transform: translateX(4px); }
+  .honor-medal {
+    width: 44px; height: 44px; flex: 0 0 44px;
+    background: linear-gradient(135deg, #ffd700, #ff9500);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 20px;
+    box-shadow: 0 3px 8px rgba(255,149,0,0.4);
+  }
+  .honor-item span { font-size: 15px; font-weight: 500; }
+
+  /* 招生 */
+  .admission {
+    background: linear-gradient(135deg, #0a2540 0%, #0d3b66 100%);
+    color: #fff;
+  }
+  .admission .section-title h3 { color: #fff; }
+  .admission .section-title .kicker { color: var(--accent); }
+  .admission .section-title p { color: rgba(255,255,255,0.75); }
+  .adm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .adm-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 16px; padding: 28px;
+  }
+  .adm-card h5 { font-size: 20px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .adm-card h5::before {
+    content: ""; display: inline-block; width: 6px; height: 22px;
+    background: var(--accent); border-radius: 3px;
+  }
+  .adm-card ul { list-style: none; }
+  .adm-card ul li {
+    padding: 8px 0; border-bottom: 1px dashed rgba(255,255,255,0.15);
+    font-size: 15px; opacity: 0.92;
+  }
+  .adm-card ul li:last-child { border-bottom: none; }
+
+  /* 联系 */
+  .contact { background: var(--bg); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .contact-info { display: grid; gap: 16px; }
+  .contact-item {
+    display: flex; gap: 16px; background: #fff; padding: 20px; border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  }
+  .contact-icon {
+    width: 48px; height: 48px; flex: 0 0 48px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: 10px; color: #fff;
+    display: flex; align-items: center; justify-content: center; font-size: 22px;
+  }
+  .contact-item strong { display: block; color: var(--primary); margin-bottom: 4px; font-size: 14px; }
+  .contact-item p { font-size: 15px; color: #374151; }
+  .contact-map {
+    background: #fff; border-radius: 16px; padding: 24px;
+    box-shadow: var(--shadow);
+  }
+  .map-placeholder {
+    height: 340px; border-radius: 12px;
+    background:
+      linear-gradient(135deg, rgba(13,110,253,0.1), rgba(34,197,94,0.1)),
+      repeating-linear-gradient(0deg, #e5edf7, #e5edf7 1px, transparent 1px, transparent 30px),
+      repeating-linear-gradient(90deg, #e5edf7, #e5edf7 1px, transparent 1px, transparent 30px),
+      #f0f5fb;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .map-pin {
+    position: relative; text-align: center;
+  }
+  .map-pin .pin {
+    width: 40px; height: 40px; border-radius: 50% 50% 50% 0;
+    background: var(--accent); transform: rotate(-45deg);
+    margin: 0 auto 8px;
+    box-shadow: 0 4px 12px rgba(255,149,0,0.5);
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: rotate(-45deg) translateY(0); }
+    50% { transform: rotate(-45deg) translateY(-8px); }
+  }
+  .map-pin p { font-size: 14px; font-weight: 600; color: var(--primary-dark); }
+
+  /* Footer */
+  footer {
+    background: #0a2540; color: #cbd5e1;
+    padding: 50px 0 20px;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 30px;
+    margin-bottom: 30px;
+  }
+  .footer-col h6 { color: #fff; font-size: 16px; margin-bottom: 14px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { padding: 4px 0; font-size: 14px; }
+  .footer-col ul li a:hover { color: var(--accent); }
+  .footer-col p { font-size: 14px; line-height: 1.8; }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: #94a3b8;
+  }
+
+  /* 响应式 */
+  @media (max-width: 960px) {
+    nav ul { display: none; position: absolute; top: 100%; right: 0; left: 0; background: #fff; flex-direction: column; padding: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    nav ul.open { display: flex; }
+    .menu-toggle { display: block; }
+    .hero h2 { font-size: 34px; }
+    .stats { grid-template-columns: repeat(2, 1fr); margin: -40px 16px 0; }
+    .stat-item:nth-child(2) { border-right: none; }
+    .stat-item { border-bottom: 1px solid #eef2f7; }
+    .stat-item:nth-child(3), .stat-item:nth-child(4) { border-bottom: none; }
+    .about-grid, .adm-grid, .contact-grid { grid-template-columns: 1fr; gap: 30px; }
+    .phi-grid { grid-template-columns: repeat(2, 1fr); }
+    .feat-grid { grid-template-columns: 1fr; }
+    .honor-list { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    section { padding: 60px 0; }
+    .section-title h3 { font-size: 26px; }
+  }
+  @media (max-width: 480px) {
+    .phi-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .about-text .meta { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 顶部栏 -->
+<div class="topbar">
+  <div class="container">
+    <span>📞 招生咨询：0512-83981017 ｜ 📍 苏州工业园区夷浜路95号</span>
+    <span>苏州工业园区管委会直属公办小学</span>
+  </div>
+</div>
+
+<!-- 导航 -->
+<header class="nav">
+  <div class="container nav-inner">
+    <div class="logo">
+      <div class="logo-mark">三</div>
+      <div class="logo-text">
+        <h1>苏州工业园区第三实验小学</h1>
+        <p>SUZHOU SIP NO.3 EXPERIMENTAL PRIMARY SCHOOL</p>
+      </div>
+    </div>
+    <button class="menu-toggle" onclick="document.getElementById('navList').classList.toggle('open')">☰</button>
+    <nav>
+      <ul id="navList">
+        <li><a href="#home">首页</a></li>
+        <li><a href="#about">学校概况</a></li>
+        <li><a href="#philosophy">办学理念</a></li>
+        <li><a href="#features">教育特色</a></li>
+        <li><a href="#honors">荣誉称号</a></li>
+        <li><a href="#admission">招生入学</a></li>
+        <li><a href="#contact">联系我们</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="home" style="padding: 0;">
+  <div class="container hero-content">
+    <span class="tag">✨ 生命成长的乐园 · OK乐园</span>
+    <h2>把学校办成<br><span>生命成长</span>的乐园</h2>
+    <p>培养热爱生命、健康快乐、知书达礼、自由创新的合格小公民。以科创教育为突破口，推进场域赋能与项目式学习，让每一位孩子在三实小遇见更好的自己。</p>
+    <div class="hero-buttons">
+      <a href="#admission" class="btn btn-primary">了解招生</a>
+      <a href="#about" class="btn btn-outline">走进三实小</a>
+    </div>
+  </div>
+</section>
+
+<!-- 数据条 -->
+<div class="container">
+  <div class="stats">
+    <div class="stat-item">
+      <div class="num">2017</div>
+      <div class="label">建校时间</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">36</div>
+      <div class="label">设计教学班</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">1500㎡</div>
+      <div class="label">STEAM专业化场域</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">35385㎡</div>
+      <div class="label">校园占地面积</div>
+    </div>
+  </div>
+</div>
+
+<!-- 关于 -->
+<section id="about">
+  <div class="container">
+    <div class="section-title">
+      <div class="kicker">ABOUT US</div>
+      <h3>走进苏州工业园区第三实验小学</h3>
+      <p>一所依托园区高科技背景、快速成长的优质公办小学</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-image"></div>
+      <div class="about-text">
+        <h4>年轻而有朝气的优质公办小学</h4>
+        <p>苏州工业园区第三实验小学（简称"园区三实小"或"SSX"）成立于2017年9月1日，是苏州工业园区管委会直属的公办全日制小学，位于中新生态科技城中心、阳澄湖半岛旅游度假区。</p>
+        <p>学校占地约35385.56平方米，建筑面积约33397.45平方米，设计规模为小学6轨制、36个教学班。建校以来，学校以科创教育和场域建设为特色，快速从"观望"阶段成长为有鲜明特色的优质学校。</p>
+        <div class="meta">
+          <div><strong>办学性质</strong>公办全日制小学</div>
+          <div><strong>学校规模</strong>6轨制 / 36班</div>
+          <div><strong>建校时间</strong>2017年9月</div>
+          <div><strong>主管单位</strong>园区管委会直属</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 办学理念 -->
+<section id="philosophy" class="philosophy">
+  <div class="container">
+    <div class="section-title">
+      <div class="kicker">PHILOSOPHY</div>
+      <h3>校训 · 校风 · 教风 · 学风</h3>
+      <p>以"学生第一、平等包容、积极进取、合作共赢"为核心价值观</p>
+    </div>
+    <div class="phi-grid">
+      <div class="phi-card">
+        <div class="phi-icon">🎯</div>
+        <h5>校训</h5>
+        <p>和善而坚定</p>
+      </div>
+      <div class="phi-card">
+        <div class="phi-icon">🌱</div>
+        <h5>校风</h5>
+        <p>做最好的自己<br>做最好的伙伴</p>
+      </div>
+      <div class="phi-card">
+        <div class="phi-icon">👨‍🏫</div>
+        <h5>教风</h5>
+        <p>和孩子一起成长</p>
+      </div>
+      <div class="phi-card">
+        <div class="phi-icon">📚</div>
+        <h5>学风</h5>
+        <p>快乐学习<br>收获每一天</p>
+      </div>
+    </div>
+    <div class="values-bar">
+      <h5>核心价值观</h5>
+      <p>学生第一 · 平等包容 · 积极进取 · 合作共赢</p>
+    </div>
+  </div>
+</section>
+
+<!-- 教育特色 -->
+<section id="features" class="features">
+  <div class="container">
+    <div class="section-title">
+      <div class="kicker">FEATURES</div>
+      <h3>教育教学特色</h3>
+      <p>以科创教育（STEM）为突破口，推动"双减"落地与教学变革</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="emoji">🔬</div>
+        <h5>科创教育 STEM</h5>
+        <p>国家科学课程校本化重构，将科创从课外转向课堂主阵地，采用项目式学习（PBL）。如四年级电路单元围绕"让小灯泡亮起来""设计房间灯光""安全用电"等真实项目展开。</p>
+        <div class="feat-tags"><span>STEM</span><span>PBL</span><span>项目式学习</span></div>
+      </div>
+      <div class="feat-card">
+        <div class="emoji">🏫</div>
+        <h5>场域赋能</h5>
+        <p>通过校园内各类空间（走廊活动区、1500㎡ STEAM专业化场域等）为不同年级学生提供年龄适宜的活动，打造"OK乐园"，通过校社协同、校企合作拓展教育空间。</p>
+        <div class="feat-tags"><span>OK乐园</span><span>幸福启航</span><span>校社协同</span></div>
+      </div>
+      <div class="feat-card">
+        <div class="emoji">🎨</div>
+        <h5>跨学科融合</h5>
+        <p>语文"诗歌文学社小编辑"整合语文与美术，美术"结绳记事"融合历史与手工。开发序列化校本课程（如"桥"课程），涵盖健康性格、科技、艺术、历史哲学等多维度目标。</p>
+        <div class="feat-tags"><span>跨学科</span><span>校本课程</span><span>综合实践</span></div>
+      </div>
+      <div class="feat-card">
+        <div class="emoji">⏰</div>
+        <h5>十分课间 百分快乐</h5>
+        <p>课间活动丰富多元，涵盖益智游戏、探究活动、体育锻炼等，注重放松、创造力、人际交往和预防近视，让孩子在课间真正放松身心。</p>
+        <div class="feat-tags"><span>课间活动</span><span>身心健康</span><span>护眼</span></div>
+      </div>
+      <div class="feat-card">
+        <div class="emoji">💡</div>
+        <h5>智慧校园</h5>
+        <p>省级智慧校园示范校，信息化手段赋能教学管理。注重教师项目式教学能力培养，编写教师培训手册，支持新教师快速掌握PBL教学方法。</p>
+        <div class="feat-tags"><span>智慧校园</span><span>教师发展</span><span>信息化</span></div>
+      </div>
+      <div class="feat-card">
+        <div class="emoji">🌳</div>
+        <h5>劳动与实践</h5>
+        <p>苏州市中小学生劳动教育实践基地，重视综合实践活动、社会实践、家庭教育协同和劳动教育，强调家校社共育、全面发展。</p>
+        <div class="feat-tags"><span>劳动教育</span><span>家校共育</span><span>社会实践</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 荣誉 -->
+<section id="honors" class="honors">
+  <div class="container">
+    <div class="section-title">
+      <div class="kicker">HONORS</div>
+      <h3>荣誉与称号</h3>
+      <p>短短数年，三实小在科创教育、智慧校园等领域屡获殊荣</p>
+    </div>
+    <div class="honor-list">
+      <div class="honor-item"><div class="honor-medal">🏆</div><span>教育部"综合实践活动研究实验单位"</span></div>
+      <div class="honor-item"><div class="honor-medal">🏆</div><span>中国STEM教育2029创新行动计划种子学校</span></div>
+      <div class="honor-item"><div class="honor-medal">🏆</div><span>江苏省STEM项目试点学校</span></div>
+      <div class="honor-item"><div class="honor-medal">🏆</div><span>江苏省智慧校园</span></div>
+      <div class="honor-item"><div class="honor-medal">🏆</div><span>苏州市特色体育项目学校</span></div>
+      <div class="honor-item"><div class="honor-medal">🏆</div><span>苏州市家庭教育课程项目学校</span></div>
+      <div class="honor-item"><div class="honor-medal">🏆</div><span>苏州市节水型学校</span></div>
+      <div class="honor-item"><div class="honor-medal">🏆</div><span>苏州市中小学生劳动教育实践基地</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 招生 -->
+<section id="admission" class="admission">
+  <div class="container">
+    <div class="section-title">
+      <div class="kicker">ADMISSION</div>
+      <h3>招生入学</h3>
+      <p>严格执行苏州工业园区义务教育招生政策，以划片入学为主</p>
+    </div>
+    <div class="adm-grid">
+      <div class="adm-card">
+        <h5>施教区范围</h5>
+        <ul>
+          <li>🧭 亭青街以东</li>
+          <li>🧭 中环北线以南</li>
+          <li>🧭 水泽路沿线展业路以西</li>
+          <li>🧭 阳澄湖大道以北</li>
+          <li>🏘️ 涵盖小区：青澄花园、湖语花园、旭辉芭堤兰湾、优步花园等</li>
+          <li>⚠️ 具体以当年招生简章公布为准</li>
+        </ul>
+      </div>
+      <div class="adm-card">
+        <h5>招生流程与提示</h5>
+        <ul>
+          <li>📅 一般于每年 5–6 月发布招生简章</li>
+          <li>📱 关注学校微信公众号及园区教育局平台</li>
+          <li>🌐 园区教育局官网：edu.sipac.gov.cn</li>
+          <li>📞 招生咨询电话：0512-83981017（成老师）</li>
+          <li>📄 需准备户籍、房产、居住证等相关材料</li>
+          <li>💼 学校同步开展教师招聘，注重科创与PBL能力</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 联系 -->
+<section id="contact" class="contact">
+  <div class="container">
+    <div class="section-title">
+      <div class="kicker">CONTACT</div>
+      <h3>联系我们</h3>
+      <p>欢迎家长、合作单位与我们取得联系</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <strong>学校地址</strong>
+            <p>苏州工业园区夷浜路95号（清澄路北、展业路西、科意路东、夷浜路南）<br>邮编：215122</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <strong>联系电话</strong>
+            <p>招生咨询：0512-83981017<br>其他事务：0512-83981303</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🌐</div>
+          <div>
+            <strong>在线平台</strong>
+            <p>园区教育局官网：edu.sipac.gov.cn<br>学校官网（历史）：ssx.sipedu.org</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <strong>办公时间</strong>
+            <p>周一至周五 8:00 – 17:00<br>节假日及寒暑假另行安排</p>
+          </div>
+        </div>
+      </div>
+      <div class="contact-map">
+        <div class="map-placeholder">
+          <div class="map-pin">
+            <div class="pin"></div>
+            <p>苏州工业园区第三实验小学</p>
+            <p style="font-size:12px;color:var(--muted);margin-top:4px;">夷浜路95号</p>
+          </div>
+        </div>
+        <p style="margin-top:14px;font-size:13px;color:var(--muted);text-align:center;">位于中新生态科技城中心 · 阳澄湖半岛旅游度假区，紧邻中环北线</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h6>关于三实小</h6>
+        <p>苏州工业园区第三实验小学是苏州工业园区管委会直属的公办全日制小学，以科创教育和场域建设为特色，致力于把学校办成"生命成长的乐园"。</p>
+      </div>
+      <div class="footer-col">
+        <h6>快捷导航</h6>
+        <ul>
+          <li><a href="#about">学校概况</a></li>
+          <li><a href="#philosophy">办学理念</a></li>
+          <li><a href="#features">教育特色</a></li>
+          <li><a href="#honors">荣誉称号</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h6>招生服务</h6>
+        <ul>
+          <li><a href="#admission">施教区查询</a></li>
+          <li><a href="#admission">招生简章</a></li>
+          <li><a href="#contact">咨询方式</a></li>
+          <li><a href="#contact">学校地址</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h6>联系方式</h6>
+        <ul>
+          <li>📞 0512-83981017</li>
+          <li>📍 夷浜路95号</li>
+          <li>📮 215122</li>
+          <li>🌐 edu.sipac.gov.cn</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2017 – <span id="year"></span> 苏州工业园区第三实验小学 版权所有 ｜ 生命成长的乐园 · OK乐园
+    </div>
+  </div>
+</footer>
+
+<script>
+  // 年份自动更新
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // 点击菜单项后关闭移动端菜单
+  document.querySelectorAll('#navList a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('navList').classList.remove('open');
+    });
+  });
+
+  // 简单的滚动显示动画
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = 1;
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.phi-card, .feat-card, .honor-item, .adm-card, .contact-item').forEach(el => {
+    el.style.opacity = 0;
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
